@@ -21,47 +21,48 @@ class tvec3
  public:
   //constructors
   tvec3(){n[0]=n[1]=n[2]=0;}
-  tvec3(const T x, const T y, const T z){n[0] = x; n[1] = y; n[2] = z;}
-  tvec3(const T d){n[0]=n[1]=n[2]=d;}
-  tvec3(const tvec3& b){n[0]=b.n[0];n[1]=b.n[1];n[2]=b.n[2];}
+  tvec3(const T& x, const T& y, const T& z){n[0] = x; n[1] = y; n[2] = z;}
+  tvec3(const T& s){n[0]=n[1]=n[2]=s;}
+  tvec3(const tvec3& v){n[0]=v.get(0);n[1]=v.get(1);n[2]=v.get(2);}
   // Assignment operators
-  tvec3& operator = (const T d){n[0]=n[1]=n[2]=d; return *this; }
-  tvec3& operator += (const tvec3& v){n[0]+=v.n[0]; n[1]+=v.n[1]; n[2]+=v.n[2]; return *this;}
-  tvec3& operator -= (const tvec3& v){n[0]-=v.n[0]; n[1]-=v.n[1]; n[2]-=v.n[2]; return *this;}
-  tvec3& operator *= ( const T d ){n[0]*=d; n[1]*=d; n[2]*=d; return *this;}
-  tvec3& operator /= ( const T d ){double d_inv = 1.0/d; n[0]*=d_inv; n[1]*=d_inv; n[2]*=d_inv; return *this; }
-  T& operator [] ( int i){return n[i];}
-  void set(T Xin, T Yin, T Zin){n[0]=Xin; n[1]=Yin; n[2]=Zin;}
+  tvec3& operator = (const T s){n[0]=n[1]=n[2]=s; return *this; }
+  tvec3& operator += (const tvec3& v){n[0]+=v.get(0); n[1]+=v.get(1); n[2]+=v.get(2); return *this;}
+  tvec3& operator -= (const tvec3& v){n[0]-=v.get(0); n[1]-=v.get(1); n[2]-=v.get(2); return *this;}
+  tvec3& operator *= ( const T& s ){n[0]*=s; n[1]*=s; n[2]*=s; return *this;}
+  tvec3& operator /= ( const T& s ){double s_inv = 1.0/s; n[0]*=s_inv; n[1]*=s_inv; n[2]*=s_inv; return *this; }
+  T& operator [] (const int i){return n[i];}
+  T get(const int& i)const{return n[i];}
+  void set(const T& Xin, const T& Yin, const T& Zin){n[0]=Xin; n[1]=Yin; n[2]=Zin;}
 
   // vector to vector operators
   tvec3 operator - (){return tvec3(-n[0],-n[1],-n[2]);}//unary
-  tvec3 operator + (const tvec3& b){return tvec3(n[0] + b.n[0], n[1] + b.n[1], n[2] + b.n[2]);}
-  tvec3 operator - (const tvec3& b){return tvec3(n[0] - b.n[0], n[1] - b.n[1], n[2] - b.n[2]);}
-  tvec3 operator * (const tvec3& b){return tvec3(n[0] * b.n[0], n[1] * b.n[1], n[2] * b.n[2]);}
-  tvec3 operator / (const tvec3& b){return tvec3(n[0] / b.n[0], n[1] / b.n[1], n[2] / b.n[2]);}
+  tvec3 operator + (const tvec3& v){return tvec3(n[0] + v.get(0), n[1] + v.get(1), n[2] + v.get(2));}
+  tvec3 operator - (const tvec3& v){return tvec3(n[0] - v.get(0), n[1] - v.get(1), n[2] - v.get(2));}
+  tvec3 operator * (const tvec3& v){return tvec3(n[0] * v.get(0), n[1] * v.get(1), n[2] * v.get(2));}
+  tvec3 operator / (const tvec3& v){return tvec3(n[0] / v.get(0), n[1] / v.get(1), n[2] / v.get(2));}
 
-  // vector to digit operators
-  tvec3 operator + (const T& d){return tvec3(n[0] + d, n[1] + d, n[2] + d);}
-  friend tvec3 operator + (T d, tvec3 v){return v+d;}
-  tvec3 operator - (const T& d){return tvec3(n[0] - d, n[1] - d, n[2] - d);}
-  friend tvec3 operator - (T d, tvec3 v){return tvec3(d - v.n[0],d - v.n[1],d - v.n[2]);}
-  tvec3 operator * (const T& d){return tvec3(n[0] * d, n[1] * d, n[2] * d);}
-  friend tvec3 operator * (T d, tvec3 v){return v*d;}
-  tvec3 operator / (const T& d){double d_inv = 1.0/d;return tvec3(n[0]*d_inv, n[1]*d_inv, n[2]*d_inv);}
-  friend tvec3 operator / (T d, tvec3 v){return tvec3(d/v.n[0],d/v.n[1],d/v.n[2]);}
+  // vector to sigit operators
+  tvec3 operator + (const T& s){return tvec3(n[0] + s, n[1] + s, n[2] + s);}
+  friend tvec3 operator + (const T& s, const tvec3& v){return tvec3(v.get(0)+s, v.get(1)+s, v.get(2)+s);}
+  tvec3 operator - (const T& s){return tvec3(n[0] - s, n[1] - s, n[2] - s);}
+  friend tvec3 operator - (const T& s, const tvec3& v){return tvec3(s-v.get(0), s-v.get(1), s-v.get(2));}
+  tvec3 operator * (const T& s){return tvec3(n[0] * s, n[1] * s, n[2] * s);}
+  friend tvec3 operator * (const T& s, const tvec3& v){return tvec3(v.get(0)*s, v.get(1)*s, v.get(2)*s);}
+  tvec3 operator / (const T& s){double s_inv = 1.0/s;return tvec3(n[0]*s_inv, n[1]*s_inv, n[2]*s_inv);}
+  friend tvec3 operator / (const T& s, const tvec3& v){return tvec3(s/v.get(0), s/v.get(1), s/v.get(2));}
 
   // equality
-  bool operator == (const tvec3& b){return (n[0]==b.n[0]) && (n[1]==b.n[1]) && (n[2]==b.n[2]);}
-  bool operator != (const tvec3& b){return !(*this==b);}
+  bool operator == (const tvec3& v){return (n[0]==v.get(0)) && (n[1]==v.get(1)) && (n[2]==v.get(2));}
+  bool operator != (const tvec3& v){return !(*this==v);}
   
   // utility functions
-  friend std::ostream& operator << (std::ostream& s, const tvec3& v){return s<<"("<<v.n[0]<<", "<<v.n[1]<<", "<<v.n[2]<<")";}
+  friend std::ostream& operator << (std::ostream& s, const tvec3& v){return s<<"("<<v.get(0)<<", "<<v.get(1)<<", "<<v.get(2)<<")";}
   T length2(){return n[0]*n[0] + n[1]*n[1] + n[2]*n[2];}
   T length(){return sqrt(length2());}
   tvec3 normalize(){(*this) /= length();return tvec3(*this);}
   tvec3 normalized(){T L = length(); return tvec3(n[0]/L,n[1]/L,n[2]/L);}
-  T dot(const tvec3& b){return (n[0]*b.n[0] + n[1]*b.n[1] + n[2]*b.n[2]);}
-  tvec3 cross(const tvec3& b) {return tvec3(n[1]*b.n[2] - n[2]*b.n[1],n[2]*b.n[0] - n[0]*b.n[2],n[0]*b.n[1] - n[1]*b.n[0]);}
+  T dot(const tvec3& v){return (n[0]*v.get(0) + n[1]*v.get(1) + n[2]*v.get(2));}
+  tvec3 cross(const tvec3& v) {return tvec3(n[1]*v.get(2) - n[2]*v.get(1),n[2]*v.get(0) - n[0]*v.get(2),n[0]*v.get(1) - n[1]*v.get(0));}
  private:
   T n[3];
 };
