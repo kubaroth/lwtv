@@ -80,12 +80,12 @@ class tmat4
 	T one=n[0]*BCD;T two=n[1]*ACD;T three=n[2]*ABD;T four=n[3]*ABC;
 	return one-two+three-four;}
   void adjoint(tmat4& m){
-	T abl = determinant2d( 8,12, 9,13);T abs = determinant2d(4,12,5,13);T abu = determinant2d(4,8,5,9 );
-	T acl = determinant2d( 8,12,10,14);T acs = determinant2d(4,12,6,14);T acu = determinant2d(4,8,6,10);
-	T adl = determinant2d( 8,12,11,15);T ads = determinant2d(4,12,7,15);T adu = determinant2d(4,8,7,11);
-	T bcl = determinant2d( 9,13,10,14);T bcs = determinant2d(5,13,6,14);T bcu = determinant2d(5,9,6,10);
-	T bdl = determinant2d( 9,13,11,15);T bds = determinant2d(5,13,7,15);T bdu = determinant2d(5,9,7,11);
-	T cdl = determinant2d(10,14,11,15);T cds = determinant2d(6,14,7,15);T cdu = determinant2d(6,10,7,11);	
+	T abl = m.determinant2d( 8,12, 9,13);T abs = m.determinant2d(4,12,5,13);T abu = m.determinant2d(4,8,5,9 );
+	T acl = m.determinant2d( 8,12,10,14);T acs = m.determinant2d(4,12,6,14);T acu = m.determinant2d(4,8,6,10);
+	T adl = m.determinant2d( 8,12,11,15);T ads = m.determinant2d(4,12,7,15);T adu = m.determinant2d(4,8,7,11);
+	T bcl = m.determinant2d( 9,13,10,14);T bcs = m.determinant2d(5,13,6,14);T bcu = m.determinant2d(5,9,6,10);
+	T bdl = m.determinant2d( 9,13,11,15);T bds = m.determinant2d(5,13,7,15);T bdu = m.determinant2d(5,9,7,11);
+	T cdl = m.determinant2d(10,14,11,15);T cds = m.determinant2d(6,14,7,15);T cdu = m.determinant2d(6,10,7,11);	
 	T ABCll=m[4]*bcl-m[5]*acl+m[6]*abl;T ABCul=m[0]*bcl-m[1]*acl+m[2]*abl;T ABCus=m[0]*bcs-m[1]*acs+m[2]*abs;T ABCuu=m[0]*bcu-m[1]*acu+m[2]*abu;
 	T ACDll=m[4]*cdl-m[6]*adl+m[7]*acl;T ACDul=m[0]*cdl-m[2]*adl+m[3]*acl;T ACDus=m[0]*cds-m[2]*ads+m[3]*acs;T ACDuu=m[0]*cdu-m[2]*adu+m[3]*acu;
 	T ABDll=m[4]*bdl-m[5]*adl+m[7]*abl;T ABDul=m[0]*bdl-m[1]*adl+m[3]*abl;T ABDus=m[0]*bds-m[1]*ads+m[3]*abs;T ABDuu=m[0]*bdu-m[1]*adu+m[3]*abu;
