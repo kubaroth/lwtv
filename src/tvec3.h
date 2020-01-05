@@ -63,6 +63,7 @@ class tvec3
   tvec3 normalized(){T L = length(); return tvec3(n[0]/L,n[1]/L,n[2]/L);}
   T dot(const tvec3& v){return (n[0]*v.get(0) + n[1]*v.get(1) + n[2]*v.get(2));}
   tvec3 cross(const tvec3& v) {return tvec3(n[1]*v.get(2) - n[2]*v.get(1),n[2]*v.get(0) - n[0]*v.get(2),n[0]*v.get(1) - n[1]*v.get(0));}
+  tvec3 lerp(tvec3& v, const T& t) {return (*this) + t*(v-(*this));}
  private:
   T n[3];
 };
