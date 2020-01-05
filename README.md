@@ -24,7 +24,7 @@ read tester.C for details.
 
 
 ## origin
-On pages 534 to 557 of the book "Graphics Gems IV", Jean-François Doué provided a useful library of most of the matrix and vector functions that are used everyday in 3d graphics.
+There are several small vector/matrix olibraries to choose from. I have previously found the one presented on parges 534 to 557 of the book "Graphics Gems IV", Jean-François Doué to be a good example
 (http://www.realtimerendering.com/resources/GraphicsGems/gems.html#gemsiv)
 (http://www.realtimerendering.com/resources/GraphicsGems/gemsiv/vec_mat/)
 
