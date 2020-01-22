@@ -28,6 +28,8 @@ class tvec3
   tvec3& operator = (const T s){n[0]=n[1]=n[2]=s; return *this; }
   tvec3& operator += (const tvec3& v){n[0]+=v.get(0); n[1]+=v.get(1); n[2]+=v.get(2); return *this;}
   tvec3& operator -= (const tvec3& v){n[0]-=v.get(0); n[1]-=v.get(1); n[2]-=v.get(2); return *this;}
+  tvec3& operator *= (const tvec3& v){n[0]*=v.get(0); n[1]*=v.get(1); n[2]*=v.get(2); return *this;}
+  tvec3& operator /= (const tvec3& v){n[0]/=v.get(0); n[1]/=v.get(1); n[2]/=v.get(2); return *this;}
   tvec3& operator *= ( const T& s ){n[0]*=s; n[1]*=s; n[2]*=s; return *this;}
   tvec3& operator /= ( const T& s ){double s_inv = 1.0/s; n[0]*=s_inv; n[1]*=s_inv; n[2]*=s_inv; return *this; }
   T& operator [] (const int i){return n[i];}
