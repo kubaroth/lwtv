@@ -35,8 +35,7 @@ class tmat3
   // matrix3 vector operators
   tvec3<T> operator * (tvec3<T>& v){
     tvec3<T> rowX = getRow(0) * v[0]; tvec3<T> rowY = getRow(1) * v[1]; tvec3<T> rowZ = getRow(2) * v[2];
-    return rowX + rowY + rowZ;
-  }
+    return rowX + rowY + rowZ;}
   // matrix3 matrix3 operators
   tmat3 operator + (const tmat3& m){tmat3 out;for(int i=0; i<9; ++i)out[i]=n[i]+m.get(i);return out;}
   tmat3 operator - (const tmat3& m){tmat3 out;for(int i=0; i<9; ++i)out[i]=n[i]-m.get(i);return out;}
