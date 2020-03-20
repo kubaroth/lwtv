@@ -25,7 +25,7 @@ class tvec3
   tvec3(const T& s){n[0]=n[1]=n[2]=s;}
   tvec3(const tvec3& v){n[0]=v.get(0);n[1]=v.get(1);n[2]=v.get(2);}
   // Assignment operators
-  tvec3& operator = (const T s){n[0]=n[1]=n[2]=s; return *this; }
+  tvec3& operator = (const T s){n[0]=n[1]=n[2]=s; return *this; }// is this needed?
   tvec3& operator += (const tvec3& v){n[0]+=v.get(0); n[1]+=v.get(1); n[2]+=v.get(2); return *this;}
   tvec3& operator -= (const tvec3& v){n[0]-=v.get(0); n[1]-=v.get(1); n[2]-=v.get(2); return *this;}
   tvec3& operator *= (const tvec3& v){n[0]*=v.get(0); n[1]*=v.get(1); n[2]*=v.get(2); return *this;}

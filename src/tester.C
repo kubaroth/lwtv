@@ -11,10 +11,10 @@ tvecTest()
 {
   cout<<"*************** test tvec3 *********************"<<endl;
   cout<<"\nconstructors:"<<endl;
-  tvec3<float> A;
-  tvec3<float> B(.1,.2,.3);
-  tvec3<float> C(.4);
-  tvec3<float> D(B);
+  tvec3<double> A;
+  tvec3<double> B(.1,.2,.3);
+  tvec3<double> C(.4);
+  tvec3<double> D(B);
   cout <<A<<", "<<B<<", "<<C<<", "<<D<<endl;
  //-------------------------------------
    cout<<"\nAssignment operators:"<<endl;
@@ -40,7 +40,7 @@ tvecTest()
   B = A - D;
   C = A * B;
   D = A / B;
-  tvec3<float> E;
+  tvec3<double> E;
   E = -D;
   cout <<A<<", "<<B<<", "<<C<<", "<<D<<", "<<E<<endl;
  //-------------------------------------
@@ -83,15 +83,15 @@ tvecTest()
 void
 tmat3Test(){
   cout<<"\n\n*************** test tmat3 *********************"<<endl;
-  tmat3<float> A;
-  tmat3<float> B;
-  tmat3<float> C;
-  tmat3<float> D;
+  tmat3<double> A;
+  tmat3<double> B;
+  tmat3<double> C;
+  tmat3<double> D;
   //-------------------------------------
   cout<<"\nAssignment operators:"<<endl;
   A[7] = 3.141;
   A(1,2) = 2.718;
-  tmat3<float> E(A);
+  tmat3<double> E(A);
   B = A;
   C -= A;
   D += A;
@@ -111,8 +111,8 @@ tmat3Test(){
   A(0,2)=-.7071;
   A(2,0)= .7071;
   A(2,2)= .7071;
-  tvec3<float> VA(1,0,0);
-  tvec3<float> VB, VC;
+  tvec3<double> VA(1,0,0);
+  tvec3<double> VB, VC;
   VB = A * VA;// A is a 45 degree turn around the Y axis
   cout <<A<<",\n"<<VA<<" "<<VB<<endl;
   //-------------------------------------
@@ -143,20 +143,20 @@ tmat3Test(){
   cout<<"\nutility functions:"<<endl;
   B.identity();
   C.identity();
-  tvec3<float> axis(0,1,0);
+  tvec3<double> axis(0,1,0);
   C.rotate(axis, (45.0*M_PI/180.0));
   A.transpose();
-  float det =  D.determinant();
+  double det =  D.determinant();
   cout <<"results:\n"<<A<<", \n"<<B<<", \n"<<C<<", \n"<<D<<", \n"<<det<<endl;
 }
 
 void
 tmat4Test(){
   cout<<"\n\n*************** test tmat4 *********************"<<endl;
-  tmat4<float> A;
-  tmat4<float> B(3.14);
-  tmat4<float> C(B);
-  tmat4<float> D, E, F, G, H;
+  tmat4<double> A;
+  tmat4<double> B(3.14);
+  tmat4<double> C(B);
+  tmat4<double> D, E, F, G, H;
   //-------------------------------------
   cout<<"\nAssignment operators:"<<endl;
   A[3] = 3.141;
@@ -179,15 +179,16 @@ tmat4Test(){
   A(0,2)=-.7071;
   A(2,0)= .7071;
   A(2,2)= .7071;
-  tvec3<float> VA(1,0,0);
-  tvec3<float> VB, VC;
+  H = A;
+  tvec3<double> VA(1,0,0);
+  tvec3<double> VB;
   VB = A * VA;// A is a 45 degree turn around the Y axis
   cout <<A<<",\n"<<VA<<" "<<VB<<endl;
   //-------------------------------------
   cout<<"\nmatrix4 matrix4 operators:"<<endl;
   cout <<"starts off: "<<B<<C<<D<<endl;
   A = B + C;
-  B = C + D;
+  B = C - D;
   E = A * B;
   cout <<"results:\n"<<A<<", \n"<<B<<", \n"<<C<<", \n"<<D<<", \n"<<E<<endl;
   //-------------------------------------
@@ -201,21 +202,62 @@ tmat4Test(){
   //-------------------------------------
   cout<<"\naccessor functions:"<<endl;
   A.set(C);
-  cout <<"results:\n"<<A<<endl;
+  VA.set(1.2,2.3,3.4);
+  B.setVecRow(2,VA);
+  cout <<"results:\n"<<A<<" \n"<<B<<endl;
   //-------------------------------------
   cout<<"\nutility functions:"<<endl;
   A.identity();
-  //rotate
+  F.identity();
+  G.identity();
+  H.identity();
+  VA.set(0,1,0);
+  F.rotate(VA, (45.0*M_PI/180.0));
+  VA.set(1.2,2.3,3.4);
+  G.translate(VA);
+  H=F;
+  VA.set(2,4,6);
+  H.scale(VA);
   B(0,2) = .12345;
   B.transpose();
-  float det = C.determinant();
+  double det = C.determinant();
   D.identity();
   D(0,0)= .7071;
   D(0,2)=-.7071;
   D(2,0)= .7071;
   D(2,2)= .7071;
   E = D.inverse();// WAAA!!!! this looks broken. :'(
-  cout <<"results:\n"<<A<<", \n"<<B<<", \n"<<det<<", \n"<<D<<", \n"<<E<<endl;
+  cout <<"results:\n"<<A<<", \n"<<B<<", \n"<<det<<", \n"<<D<<", \n"<<E<<", \n"<<F<<", \n"<<G<<", \n"<<H<<endl;
+  cout<<"\n\nand:\n"<<endl;
+  A.identity();
+  A.rotate(tvec3<double>(1,0,0),(5.0*M_PI/180.0));
+  //cout<<"\nA!"<<A<<endl;
+  //B.setRotation(tvec3<double>(1,0,0),(5.0*M_PI/180.0));
+  //C.identity();
+  //D = C *B;
+  //cout<<"\nD"<<D<<endl;
+  A.rotate(tvec3<double>(0,1,0),(10.0*M_PI/180.0));
+  //A.rotate(tvec3<double>(0,0,1),(3.0*M_PI/180.0));
+  tvec3<double> Trans, Rot, Scl;
+  A.extract(Trans,Rot,Scl);
+  cout<<"extracted:"<<A<<"\n\n"<<Trans<<", "<<Rot*(180/M_PI)<<", "<<Scl<<endl;
+  B.identity();
+  B.rotate(tvec3<double>((5.0*M_PI/180.0),(10.0*M_PI/180.0),(20.0*M_PI/180.0)));
+  B.scale(tvec3<double>(2,3,4));
+  B.extract(Trans,Rot,Scl);
+  cout<<"B extracted:"<<B<<"\n\n"<<Trans<<", "<<Rot*(180/M_PI)<<", "<<Scl<<endl;
+
+  C.identity();
+  C.rotate(tvec3<double>((-5.0*M_PI/180.0),(-10.0*M_PI/180.0),(-20.0*M_PI/180.0)));
+  C.scale(tvec3<double>(2,3,4));
+  C.extract(Trans,Rot,Scl);
+  cout<<"C extracted:"<<C<<"\n\n"<<Trans<<", "<<Rot*(180/M_PI)<<", "<<Scl<<endl;
+
+  D.identity();
+  D.rotate(tvec3<double>((0*M_PI/180.0),(0.0*M_PI/180.0),(-90.0*M_PI/180.0)));
+  D.scale(tvec3<double>(2,3,4));
+  D.extract(Trans,Rot,Scl);
+  cout<<"D extracted:"<<D<<"\n\n"<<Trans<<", "<<Rot*(180/M_PI)<<", "<<Scl<<endl;
 
 }
 

@@ -33,18 +33,15 @@ class tmat3
   friend tmat3 operator * (const tmat3& m, const T& s){tmat3 out;for(int i=0; i<9; ++i)out[i]=m.get(i)*s;return out;}
   friend tmat3 operator / (const tmat3& m, const T& s){tmat3 out;for(int i=0; i<9; ++i)out[i]=m.get(i)/s;return out;}
   // matrix3 vector operators
-  tvec3<T> operator * (tvec3<T>& v){
-    tvec3<T> rowX = getRow(0) * v[0]; tvec3<T> rowY = getRow(1) * v[1]; tvec3<T> rowZ = getRow(2) * v[2];
-    return rowX + rowY + rowZ;}
+  tvec3<T> operator * (tvec3<T>& v){tvec3<T> rowX = getRow(0) * v[0]; tvec3<T> rowY = getRow(1) * v[1]; tvec3<T> rowZ = getRow(2) * v[2]; return rowX + rowY + rowZ;}
   // matrix3 matrix3 operators
   tmat3 operator + (const tmat3& m){tmat3 out;for(int i=0; i<9; ++i)out[i]=n[i]+m.get(i);return out;}
   tmat3 operator - (const tmat3& m){tmat3 out;for(int i=0; i<9; ++i)out[i]=n[i]-m.get(i);return out;}
-  friend tmat3 operator * (const tmat3& mA, const tmat3& mB){
-    tmat3 out;for(int i=0;i<3;++i)for(int j=0;j<3;++j)for(int k=0;k<3;++k)out(i,j)=mA.get(i,k)*mB.get(k,j);return out;}
+  friend tmat3 operator * (const tmat3& mA, const tmat3& mB){tmat3 out;for(int i=0;i<3;++i)for(int j=0;j<3;++j)for(int k=0;k<3;++k)out(i,j)=mA.get(i,k)*mB.get(k,j);return out;}
   // equality functions
   bool operator == (const tmat3& m){for(int i=0; i<9; ++i)if(n[i]!=m.get(i))return false;return true;}
   bool operator != (const tmat3& m){return !(*this==m);}
-  // accessor functions
+  // accessor functions,                       are these needed?
   T get(const int i)const{return n[i];}// get() is const
   T get(const int r, const int c)const{return n[(r*3) + c];}// get() is const
   void set(const tvec3<T> a, const tvec3<T> b, const tvec3<T> c){
@@ -69,6 +66,7 @@ class tmat3
     B.set(t*Axis.get(0)*Axis.get(1) - s*Axis.get(2), t*Axis.get(1)*Axis.get(1) + c, t*Axis.get(1)*Axis.get(2) + s*Axis.get(0));
     C.set(t*Axis.get(0)*Axis.get(2) + s*Axis.get(1), t*Axis.get(1)*Axis.get(2) - s*Axis.get(0), t*Axis.get(2)*Axis.get(2) + c);
     set(A,B,C);}
+  // needs scale function
   void transpose(){
     tvec3<T> A, B, C;
     A.set(n[0],n[3],n[6]);
