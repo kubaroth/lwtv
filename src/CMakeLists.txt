@@ -69,6 +69,9 @@ endif() # end of local TBB install
 
 target_link_directories(tester BEFORE PUBLIC ${INSTALL_DIR}/lib)
 target_include_directories(tester BEFORE PUBLIC ${INSTALL_DIR}/include)
+# if offline TBB_PATH provided
+target_include_directories(tester BEFORE PUBLIC ${TBB_PATH}/include)
+target_link_directories(tester BEFORE PUBLIC ${TBB_PATH}/lib)
 
 # RPATH
 set_target_properties(
